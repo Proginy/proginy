@@ -17,7 +17,6 @@ public class User
 
     @Id
     @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false, precision = 15, scale = 0)
     private Long id;
 
     @Column(name = "first_name", unique = false, nullable = true, length = 60)

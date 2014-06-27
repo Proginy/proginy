@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService
 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     @Inject
     public UserServiceImpl(final UserRepository repository)
     {
-        this.repository = repository;
+        this.userRepository = repository;
     }
 
     @Override
@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService
     public User save(@NotNull @Valid final User user)
     {
         LOGGER.debug("Creating {}", user);
-        User existing = repository.findOne(user.getId());
+        User existing = userRepository.findOne(user.getId());
         if (existing != null)
         {
             throw new UserAlreadyExistsException(
                     String.format("There already exists a user with id=%s", user.getId()));
         }
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService
     public List<User> getList()
     {
         LOGGER.debug("Retrieving the list of all users");
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
 }
